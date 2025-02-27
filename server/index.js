@@ -1,4 +1,4 @@
-import express from "express";
+import express, { response } from "express";
 import puppeteer from "puppeteer";
 import cors from "cors";
 import stringSimilarity from "string-similarity"; 
@@ -132,7 +132,9 @@ const mergeProductData = (flipkart, amazon) => {
   return mergedData.filter((item) => item.details.flipkart || item.details.amazon);
 };
 
-
+app.get("/", (req, res) => {
+  res.json("Hello world")
+})
 
 app.get("/api/v1/search/:query", async (req, res) => {
   const { query } = req.params;
