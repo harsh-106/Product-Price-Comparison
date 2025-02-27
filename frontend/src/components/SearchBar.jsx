@@ -14,7 +14,7 @@ const SearchBar = ({ setResults, setLoading }) => {
 
     try {
       const response = await axios.get(
-        `https://product-price-comparison-v2w2.vercel.app/api/v1/search/${query}`
+        `http://localhost:3000/api/v1/search/${query}`
       );
       setResults(response.data);
     } catch (error) {

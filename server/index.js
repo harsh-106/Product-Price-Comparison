@@ -68,7 +68,6 @@ const fetchAmazonData = async (query) => {
 
 
 
-
 const mergeProductData = (flipkart, amazon) => {
   const mergedData = [];
 
