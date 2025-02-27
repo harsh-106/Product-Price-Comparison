@@ -1,26 +1,18 @@
 import express from "express";
-import puppeteer from "puppeteer-core";
-import chromium from "chrome-aws-lambda";
+import puppeteer from "puppeteer";
 import cors from "cors";
-import stringSimilarity from "string-similarity";
+import stringSimilarity from "string-similarity"; 
 
 const app = express();
 app.use(cors());
 
+
+
 const flipkartUrl = (query) => `https://www.flipkart.com/search?q=${query}`;
 const amazonUrl = (query) => `https://www.amazon.in/s?k=${query}`;
 
-const launchBrowser = async () => {
-  return await puppeteer.launch({
-    args: chromium.args,
-    executablePath: await chromium.executablePath,
-    headless: true,
-    defaultViewport: chromium.defaultViewport,
-  });
-};
-
 const fetchFlipkartData = async (query) => {
-  const browser = await launchBrowser();
+  const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
   await page.setUserAgent(
@@ -44,8 +36,10 @@ const fetchFlipkartData = async (query) => {
   return products;
 };
 
+
+
 const fetchAmazonData = async (query) => {
-  const browser = await launchBrowser();
+  const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
   await page.setUserAgent(
@@ -71,6 +65,9 @@ const fetchAmazonData = async (query) => {
   await browser.close();
   return products;
 };
+
+
+
 
 const mergeProductData = (flipkart, amazon) => {
   const mergedData = [];
@@ -135,6 +132,8 @@ const mergeProductData = (flipkart, amazon) => {
   return mergedData.filter((item) => item.details.flipkart || item.details.amazon);
 };
 
+
+
 app.get("/api/v1/search/:query", async (req, res) => {
   const { query } = req.params;
   try {
@@ -147,7 +146,4 @@ app.get("/api/v1/search/:query", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
-
-export default app;
+app.listen(3000, () => console.log("Server is running on port 3000"));
