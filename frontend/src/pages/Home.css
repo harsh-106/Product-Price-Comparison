@@ -17,6 +17,15 @@
     
 }
 
+.loading-text {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #0073e6;
+    margin-top: 20px;
+  }
+  
+
 .product-card {
     width: 250px; 
     border: 1px solid #ddd; 
