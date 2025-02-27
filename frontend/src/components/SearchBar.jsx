@@ -11,7 +11,7 @@ const SearchBar = ({ setResults, setLoading }) => {
     setLoading(true); // Show loading indicator
 
     try {
-      const response = await axios.get(`http://localhost:3000/api/v1/search/${query}`);
+      const response = await axios.get(`https://product-price-comparison-d9ts.vercel.app/api/v1/search/${query}`);
       setResults(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
